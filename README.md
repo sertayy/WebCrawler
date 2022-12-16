@@ -1,6 +1,6 @@
 # WebCrawler
 A Webcrawler Azure function app that extracts device information from the [Azure device catalog](https://devicecatalog.azure.com/) and updates the information stored on the database in an automated manner. Details in [confluence page](https://industriereply.atlassian.net/wiki/spaces/~633ee4737f85f16777a28788/pages/1807646721/Web+Crawler).
-Reach [Sertay Akpinar](mailto:s.akpinar@reply.de?subject=Web%20Crawler%20Server%Password) to ask server password.
+Reach [Sertay Akpinar](mailto:s.akpinar@reply.de?subject=Web%20Crawler%20Server%20Password) to ask server password.
 
 ## Packages
 Target Framework: .Net 6.0
