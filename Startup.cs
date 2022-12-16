@@ -1,9 +1,9 @@
 ﻿using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using WebCrawler;
 using WebCrawler.Data;
 using WebCrawler.Services;
-using WebCrawler;
 
 [assembly: WebJobsStartup(typeof(Startup))]
 namespace WebCrawler
@@ -12,8 +12,8 @@ namespace WebCrawler
     {
         public void Configure(IWebJobsBuilder builder)
         {
-            builder.Services.AddDbContext<WebCrawlerContext>();
-            builder.Services.AddScoped<IWebCrawlerService, WebCrawlerService>();
+            builder.Services.AddDbContext<DeviceContext>();
+            builder.Services.AddScoped<IDeviceService, DeviceService>();
         }
     }
 }

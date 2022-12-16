@@ -1,30 +1,37 @@
-﻿using System.Net.Http;
-using System.Text.RegularExpressions;
-
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using WebCrawler.Models;
 
 namespace WebCrawler.Helpers
 {
     public class WebCrawlerHelper
     {
-        public static string GetHtmlCode(string url)
+        public static bool IsScraperFinished(StatusEnum status)
         {
-            try
+            // TODO: Maybe add cases for other conditions
+            switch (status)
             {
-                using HttpClient client = new(); //ASK: Do I have to use "using" keyword?
-                using HttpResponseMessage response = client.GetAsync(url).Result;
-                using HttpContent content = response.Content;
-                return content.ReadAsStringAsync().Result;
+                case StatusEnum.Finished: return true;
             }
-            catch (HttpRequestException e)
-            {
-                throw new KnownException($"Error occured while getting the source of the url: {e.Message}");
-            }
+            return false;
         }
 
-        public static string GetRegexMatches(string htmlCode, string regexPattern)
+        public static List<Device> DeserializeJsonToDeviceList(string json)
         {
-            Regex regex = new (regexPattern);
-            return regex.Matches(htmlCode).ToString(); //TODO: I think it should to list, check it later!!
+            var jsonReader = new JsonTextReader(new StringReader(json))
+            {
+                SupportMultipleContent = true
+            };
+            List<Device> devices = new();
+            var jsonSerializer = new JsonSerializer();
+            while (jsonReader.Read())
+            {
+                Device device = jsonSerializer.Deserialize<Device>(jsonReader);
+                devices.Add(device);
+            }
+            jsonReader.Close();
+            return devices;
         }
     }
 }

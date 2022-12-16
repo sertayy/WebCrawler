@@ -4,15 +4,15 @@ using WebCrawler.Models;
 
 namespace WebCrawler.Data
 {
-    public class WebCrawlerContext : DbContext
+    public class DeviceContext : DbContext
     {
-        public WebCrawlerContext(DbContextOptions<WebCrawlerContext> options) : base(options)
+        public DeviceContext(DbContextOptions<DeviceContext> options) : base(options)
         {
         }
-        public DbSet<WebCrawlerModel> webCrawlers { get; set; }
+        public DbSet<Device> Devices { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new WebCrawlerEntityTypeConfiguration().Configure(modelBuilder.Entity<WebCrawlerModel>());
+            new DeviceEntityTypeConfiguration().Configure(modelBuilder.Entity<Device>());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
